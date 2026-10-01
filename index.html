@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<title>Day Logger — Recomp OS</title>
+<title>4MUL8R Fit — Recomp OS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="theme-color" content="#14181D">
 <link rel="manifest" href="manifest.webmanifest">
@@ -511,7 +511,7 @@ body.ob-open{overflow:hidden}body.ob-open #fab{display:none}
 
 <header>
   <button class="slot" id="gosettings" aria-label="Settings" title="Settings">⚙️</button>
-  <div class="brand"><h1>Day<span class="em">.</span>Logger</h1><span class="sub">Recomp OS v13 · source · refine · conquer</span></div>
+  <div class="brand"><h1>4MUL8R<span class="em">.</span>Fit</h1><span class="sub">Recomp OS v13.1 · source · refine · conquer</span></div>
   <div class="modesw" role="tablist" aria-label="Mode"><button role="tab" data-mode="nutrition">Nutrition</button><button role="tab" data-mode="fitness">Fitness</button></div>
 </header>
 
@@ -790,7 +790,7 @@ body.ob-open{overflow:hidden}body.ob-open #fab{display:none}
     <div style="display:flex;flex-direction:column;gap:8px">
       <button class="addbtn" id="installapp" hidden style="margin:0;padding:11px">📲 Install to home screen</button>
       <button class="slot" id="reloadapp" style="margin:0;padding:11px">↻ Load the latest version</button>
-      <p class="hint" style="margin:0">Day Logger <span id="appver"></span>. After you push to GitHub, use Load the latest version if the change hasn't shown up.</p>
+      <p class="hint" style="margin:0">4MUL8R Fit <span id="appver"></span>. After you push to GitHub, use Load the latest version if the change hasn't shown up.</p>
     </div>
   </div>
 </section>
@@ -1420,7 +1420,7 @@ async function orChat(messages,extra){
   if(!key){ toast('Add your OpenRouter key in ⚙️ Settings'); throw new Error('nokey'); }
   const r=await fetch('https://openrouter.ai/api/v1/chat/completions',{
     method:'POST',
-    headers:{'Content-Type':'application/json','Authorization':'Bearer '+key,'X-Title':'4MUL8R Day Logger'},
+    headers:{'Content-Type':'application/json','Authorization':'Bearer '+key,'X-Title':'4MUL8R Fit'},
     body:JSON.stringify(Object.assign({model:AIC.get('ormodel')||'anthropic/claude-sonnet-4.5',messages},extra||{}))
   });
   if(!r.ok) throw new Error('OpenRouter '+r.status);
@@ -1440,7 +1440,7 @@ function appContext(){
     const dObj=new Date(dd+'T12:00:00');
     const cw=(st.customWork||[]).map(w=>w.name+' '+w.duration+'min').join(', '); const rn=(st.runs||[]).map(r=>r.type+' '+r.duration+'min').join(', '); return dd+' ('+dayNames[dObj.getDay()]+'): '+Math.round(t.k)+'kcal P'+Math.round(t.p)+(st.session?' · trained '+st.session:'')+(cw?' · '+cw:'')+(rn?' · run: '+rn:'')+(st.weight?' · '+st.weight+'lb':'');
   }catch(e){ return dd; } }).join('\n')||'(no prior days on this device)';
-  return 'You are the coach inside 4MUL8R Day Logger, a recomp tracking app. Daily targets: '
+  return 'You are the coach inside 4MUL8R Fit, a recomp tracking app. Daily targets: '
     +activeTargets().k+'kcal, P'+activeTargets().p+' C'+activeTargets().c+' F'+activeTargets().f
     +'.\n\nABOUT HIM:\n'+aiProfile()
     +'\n\nCURRENT STATUS: Today is '+dayNames[now.getDay()]+' '+todayStr+', current time '+timeStr+'.'
@@ -2115,7 +2115,7 @@ document.getElementById('weekgen').onclick=async()=>{
   const box=document.getElementById('weeksum');
   try{
     const out=await orChat([
-      {role:'system',content:'You are the coach in 4MUL8R Day Logger. Today is '+new Date().toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric',year:'numeric'})+'. Daily targets: '+activeTargets().k+'kcal P'+activeTargets().p+' C'+activeTargets().c+' F'+activeTargets().f+'. ABOUT THEM: '+aiProfile().replace(/\n/g,' ')+' Weekly review: adherence, protein average, training consistency (note recovery if applicable), weight trend if present, patterns worth noticing, and end with ONE specific focus for next week. Direct, warm, no fluff, under 180 words. Use markdown formatting.'},
+      {role:'system',content:'You are the coach in 4MUL8R Fit. Today is '+new Date().toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric',year:'numeric'})+'. Daily targets: '+activeTargets().k+'kcal P'+activeTargets().p+' C'+activeTargets().c+' F'+activeTargets().f+'. ABOUT THEM: '+aiProfile().replace(/\n/g,' ')+' Weekly review: adherence, protein average, training consistency (note recovery if applicable), weight trend if present, patterns worth noticing, and end with ONE specific focus for next week. Direct, warm, no fluff, under 180 words. Use markdown formatting.'},
       {role:'user',content:'My last 7 days:\n'+weekContext()}]);
     box.innerHTML=mdToHtml(out); box.style.display='block'; speak(out);
   }catch(e){ if(e.message!=='nokey'){ box.textContent='Could not generate — check signal/key.'; box.style.display='block'; } }
@@ -2382,7 +2382,7 @@ function flSystem(){
   const libNames=new Set();
   const lib=allUnits().map(u=>{ libNames.add(u.n); return u.n+' | '+u.k+' '+u.p+' '+u.c+' '+u.f; }).join('\n');
   const hist=allLoggedMeals().filter(h=>!libNames.has(h.n)).slice(0,60).map(h=>h.n+' | '+h.k+' '+h.p+' '+h.c+' '+h.f).join('\n');
-  return `You are the AI inside ${uName()}'s Day Logger: their food logger and coach. (In these instructions, he/his refers to the user, ${uName()}.) You answer questions about his log (favorites, what he ate, macros on a past meal, trends), coach him briefly, and turn what he eats into log entries through a short conversation. When he taps Log, the app writes them straight into his day and shows his updated macros. He talks by voice dictation — casual, approximate, and he often revises portions two or three times. Don't over-anchor on his first description.
+  return `You are the AI inside ${uName()}'s 4MUL8R Fit app: their food logger and coach. (In these instructions, he/his refers to the user, ${uName()}.) You answer questions about his log (favorites, what he ate, macros on a past meal, trends), coach him briefly, and turn what he eats into log entries through a short conversation. When he taps Log, the app writes them straight into his day and shows his updated macros. He talks by voice dictation — casual, approximate, and he often revises portions two or three times. Don't over-anchor on his first description.
 
 REPLY FORMAT: exactly one JSON object. No prose outside it, no code fences.
 {"say":"...","questions":[{"q":"...","options":["...","..."]}],"lookup":"...","history":{"from":"YYYY-MM-DD","to":"YYYY-MM-DD","search":"..."},"status":true,"proposal":{"items":[],"remove":[],"assumptions":[]}}
@@ -2591,7 +2591,7 @@ document.getElementById('gologger').onclick=()=>{
 if('serviceWorker' in navigator && location.protocol==='https:') navigator.serviceWorker.register('sw.js').catch(()=>{});
 
 // ---------- v10.1: settings ----------
-const APP_VERSION='v13';
+const APP_VERSION='v13.1';
 function renderThemeGrid(){
   const cur=localStorage.getItem('recomp-theme')||'auto';
   const card=(id,t,label)=>`<button class="themeopt ${cur===id?'on':''}" data-theme-id="${id}" aria-pressed="${cur===id}">
@@ -3437,7 +3437,7 @@ function wlSystem(){
   const st=live?muscleStatus(trainEvents(10,S.date),Date.now()):dayStatus(trainEvents(1,S.date),S.date);
   const stTxt=MORDER.map(m=>m+'='+({r:'just trained',y:'healing',o:'worked on the side',"":'ready'})[st[m].c]).join(', ');
   const recent=[]; for(let i=1;i<=10;i++){ const d=isoAdd(S.date,-i), evs=trainEvents(1,d); if(evs.length) recent.push(d+': '+evs.map(e=>e.name+' [main '+e.p.join(',')+(e.s.length?'; side '+e.s.join(','):'')+']'+(e.detail?' '+e.detail:'')).join(' | ')); }
-  return `You are the workout logger inside ${uName()}'s Day Logger. (In these instructions, he/his refers to the user, ${uName()}.) You turn what he did into log entries through a short conversation, and answer questions about his training. He talks by voice dictation: casual, approximate, and he revises. Never ask about food or macros.
+  return `You are the workout logger inside ${uName()}'s 4MUL8R Fit app. (In these instructions, he/his refers to the user, ${uName()}.) You turn what he did into log entries through a short conversation, and answer questions about his training. He talks by voice dictation: casual, approximate, and he revises. Never ask about food or macros.
 
 REPLY FORMAT: exactly one JSON object. No prose outside it, no code fences.
 {"say":"...","questions":[{"q":"...","options":["...","..."]}],"proposal":{"items":[],"remove":[]}}
@@ -3668,7 +3668,7 @@ function obChips(list,sel,attr,multi){ return '<div class="ob-chips">'+list.map(
 function obField(id,label,val,attrs){ return `<label class="ob-f"><span>${label}</span><input id="${id}" value="${flEsc(val??'')}" ${attrs||''}></label>`; }
 function obStep(){
   const u=OB.u, st=OB_STEPS[OB.i], again=OB.again;
-  if(st==='welcome') return `<h2>${again?'Update your setup':'Let’s set up your Day Logger'}</h2>
+  if(st==='welcome') return `<h2>${again?'Update your setup':'Let’s set up 4MUL8R Fit'}</h2>
     <p class="ob-lead">${again?'Change anything that’s different. Your logged days stay as they are.':'A few quick questions so your targets, meal ideas and AI coach fit you. About three minutes. Everything stays on this device.'}</p>
     <ul class="ob-list"><li>Your numbers and goal</li><li>A daily calorie and macro plan</li><li>Foods you eat and how you train</li><li>Connecting the AI that logs for you</li></ul>
     ${again?'':'<button class="ob-link" id="ob-restore">I have a backup file. Restore it instead.</button>'}`;
@@ -3707,7 +3707,7 @@ function obStep(){
     <ol class="ob-steps">
       <li><b>Sign in to OpenRouter</b> with Google, GitHub or email.<a class="ob-ext" href="https://openrouter.ai/" target="_blank" rel="noopener">Open openrouter.ai ↗</a></li>
       <li><b>Add credits.</b> Settings → Credits → Add credits. $5 is plenty to start; the default model costs a fraction of a cent per message. Free models exist but are capped at 50 requests a day.<a class="ob-ext" href="https://openrouter.ai/settings/credits" target="_blank" rel="noopener">Open Credits ↗</a></li>
-      <li><b>Create a key.</b> Settings → API Keys → Create key. Name it “Day Logger” and set a credit limit, like $5, so it can never overspend.<a class="ob-ext" href="https://openrouter.ai/settings/keys" target="_blank" rel="noopener">Open API Keys ↗</a></li>
+      <li><b>Create a key.</b> Settings → API Keys → Create key. Name it “4MUL8R Fit” and set a credit limit, like $5, so it can never overspend.<a class="ob-ext" href="https://openrouter.ai/settings/keys" target="_blank" rel="noopener">Open API Keys ↗</a></li>
       <li><b>Copy the key.</b> It starts with <code>sk-or-v1-</code> and is only shown once.</li>
       <li><b>Paste it here.</b></li>
     </ol>
